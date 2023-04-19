@@ -1,5 +1,6 @@
 {
-  "name": "frontend",
+  "name": "bench_bnb",
+  "description": "Everyone's favorite app for finding and rating benches!",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
