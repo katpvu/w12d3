@@ -1,8 +1,13 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux";
 import { createBench } from "../../store/benches";
+import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
+import { useSelector } from "react-redux";
 
 const BenchFormPage = props => {
+    const sessionUser = useSelector(state => state.session.user);
+    const dispatch = useDispatch();
+
     const [title, setTitle] = useState("");
     const [price, setPrice] = useState(0);
     const [description, setDescription] = useState("");
@@ -11,10 +16,11 @@ const BenchFormPage = props => {
     const [longitude, setLogitude] = useState(0)
     const [errors, setErrors] = useState([])
 
-    const dispatch = useDispatch();
+    if (!sessionUser) return <Redirect to='/login' />
+    
 
     const handleSubmit = (e) => {
-        e.preventDefault;
+        e.preventDefault();
         setErrors([])
         const newBench = {
             title, 
@@ -40,6 +46,9 @@ const BenchFormPage = props => {
         <div>
             <h2>Create a new Bench</h2>
             <form onSubmit={handleSubmit}>
+                <ul>
+                    {errors.map(error => <li key={error}>{error}</li>)}
+                </ul>
                 <label>Title:
                     <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
                 </label>
@@ -65,7 +74,7 @@ const BenchFormPage = props => {
                     <input disabled type="number" value={longitude} />
                 </label>
 
-                <input type="submit" value="submit" />
+                <button>Submit</button>
             </form>
 
         </div>
