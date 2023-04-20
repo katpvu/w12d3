@@ -32,5 +32,53 @@ ApplicationRecord.transaction do
     }) 
   end
 
+  # Create benches
+  Bench.create!({
+    title: "Modern 2 Bedroom Apartment",
+    description: Faker::Lorem.sentence(word_count: 10),
+    price: 111,
+    seating: 6,
+    lat: 37.77649208784408, 
+    lng: -122.4126448452817
+  })
+
+  Bench.create!({
+    title: "Lovely staycation",
+    description: Faker::Lorem.sentence(word_count: 10),
+    price: 129,
+    seating: 5,
+    lat: 37.77519686166071, 
+    lng: -122.41643806132626,
+  })
+
+  Bench.create!({
+    title: "Newly renovated studio",
+    description: Faker::Lorem.sentence(word_count: 10),
+    price: 477,
+    seating: 4,
+    lat: 37.77105294140304, 
+    lng: -122.4111333004916
+  })
+
+  Bench.create!({
+    title: "Close to the beach apartment",
+    description: Faker::Lorem.sentence(word_count: 10),
+    price: 150,
+    seating: 3,
+    lat: 37.7752461118801,
+    lng: -122.41607726827337
+  })
+
+  Bench.create!({
+    title: "Located in downtown studio apartment",
+    description: Faker::Lorem.sentence(word_count: 10),
+    price: 400,
+    seating: 2,
+    lat: 37.771908709793706, 
+    lng: -122.41694336481912
+  })
+
+
+
   puts "Done!"
 end
