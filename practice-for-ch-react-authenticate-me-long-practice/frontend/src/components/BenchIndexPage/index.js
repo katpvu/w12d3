@@ -10,8 +10,7 @@ const BenchIndexPage = (props) => {
 
     useEffect(() => {
         dispatch(fetchBenches())
-        
-    }, [dispatch])
+    }, [])
 
     
 

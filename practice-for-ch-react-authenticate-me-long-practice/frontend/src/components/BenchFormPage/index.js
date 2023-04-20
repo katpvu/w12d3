@@ -3,10 +3,13 @@ import { useDispatch } from "react-redux";
 import { createBench } from "../../store/benches";
 import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom"
+import './index.css'
 
 const BenchFormPage = props => {
     const sessionUser = useSelector(state => state.session.user);
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const [title, setTitle] = useState("");
     const [price, setPrice] = useState(0);
@@ -21,25 +24,26 @@ const BenchFormPage = props => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setErrors([])
         const newBench = {
-            title, 
-            price,
-            description,
-            seating
+            title: title, 
+            price: price,
+            description: description,
+            seating: seating
         };
-        return dispatch(createBench(newBench))
+        dispatch(createBench(newBench))
+            //.then(history.push("/")) // redirect to home page is successful response
             .catch(async (res) => {
                 let data;
                 try {
                     data = await res.clone().json()
                 } catch {
+                    console.log("errors have appeared")
                     data = await res.text()
                 }
-                if (data?.errors) setErrors(data.errors);
-                else if (data) setErrors([data]);
+                if (data?.errors) setErrors(data.errors); // if in an object, key into errors
+                else if (data) setErrors([data]); // if error is returned as a text
                 else setErrors([res.statusText])
-            })
+            });
     }
 
     return (
@@ -47,7 +51,7 @@ const BenchFormPage = props => {
             <h2>Create a new Bench</h2>
             <form onSubmit={handleSubmit}>
                 <ul>
-                    {errors.map(error => <li key={error}>{error}</li>)}
+                    {errors.map(error => <li key={error} className="error-message">{error}</li>)}
                 </ul>
                 <label>Title:
                     <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
