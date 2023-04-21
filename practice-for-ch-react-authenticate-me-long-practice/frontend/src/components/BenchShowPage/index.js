@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom/cjs/react-router-dom.min"
 import { fetchBench } from "../../store/benches";
 import { getBench } from "../../store/benches";
+import BenchMapWrapper from "../BenchMap";
 
 const BenchShowPage = props => {
     const { benchId } = useParams();
@@ -18,6 +19,7 @@ const BenchShowPage = props => {
     return (
         <div>
             <h1>Bench Show Page</h1>
+            <BenchMapWrapper />
             <h2>{bench.title}</h2>
             <section>
                 <h3>Details</h3>

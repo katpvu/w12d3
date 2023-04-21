@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { fetchBenches } from "../../store/benches";
 import BenchList from "../BenchList";
+import BenchMapWrapper from "../BenchMap";
 
 const BenchIndexPage = (props) => {
     const benches = useSelector(state => Object.values(state.benches))
@@ -15,16 +16,23 @@ const BenchIndexPage = (props) => {
     }, [])
 
     const markerEventHandlers = (e) => ({
-        click: (e) => history.push(`/benches/${bench.id}`)
+        click: (e) => history.push(`/benches/${e.target.id}`)
     })
 
     const mapEventHandlers = (e) => {
-
+        const latLng = e.latLng.toJSON();
+        const queryStringLatLng = new URLSearchParams(latLng).toString();
+        return {
+            click: (e) => history.push({
+                pathname:'/benches/new',
+                search: queryStringLatLng
+            })
+        }
     }
 
     return (
         <div>
-            <BenchMap benches={benches} markerEventHandlers={markerEventHandlers} mapEventHandlers={mapEventHandlers}/>
+            <BenchMapWrapper benches={benches} markerEventHandlers={markerEventHandlers} mapEventHandlers={mapEventHandlers}/>
             <BenchList benches={benches}/>
         </div>
     )
