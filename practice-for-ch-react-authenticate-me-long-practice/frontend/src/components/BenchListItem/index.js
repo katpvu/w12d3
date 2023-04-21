@@ -1,5 +1,5 @@
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
-
+import './index.css'
 const BenchListItem = ({bench}) => {
     console.log(bench, "from BenchListItem")
     const history = useHistory();
@@ -8,8 +8,8 @@ const BenchListItem = ({bench}) => {
         history.push(`/benches/${bench.id}`)
     }
     return (
-        <div onClick={handleClick}>
-            <h3>{bench.title}</h3>
+        <div onClick={handleClick} className="bench-item-container">
+            <h3 className="bench-title">{bench.title}</h3>
             <p>{bench.price}</p>
         </div>
     )

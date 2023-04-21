@@ -30,7 +30,7 @@ export const fetchBenches = () => async (dispatch) => {
 export const fetchBench = (benchId) => async (dispatch) => {
     let res = await csrfFetch(`/api/benches/${benchId}`);
     let data = await res.json();
-    console.log(data)
+    // console.log(data)
     return dispatch(addBench(data))
 }
 
@@ -41,7 +41,7 @@ export const createBench = (benchData) => async (dispatch) => {
         body: JSON.stringify(benchData)
     });
     let data = await res.json();
-    console.log(data)
+    // console.log(data)
     return dispatch(addBench(data))
 }
 

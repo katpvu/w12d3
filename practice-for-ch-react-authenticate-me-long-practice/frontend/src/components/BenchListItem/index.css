@@ -1,0 +1,17 @@
+.bench-item-container {
+    border: 1px solid black;
+    margin-bottom: 5px;
+    padding: 0px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.bench-item-container:hover {
+    background-color: pink;
+}
+
+.bench-title {
+    font-size: 2rem;
+}

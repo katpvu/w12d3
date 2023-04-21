@@ -5,22 +5,36 @@ import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom"
 import './index.css'
+import { useInput, useSubmit } from "../../hooks/index"
 
 const BenchFormPage = props => {
-    const sessionUser = useSelector(state => state.session.user);
     const dispatch = useDispatch();
+    const sessionUser = useSelector(state => state.session.user);
     const history = useHistory();
 
-    const [title, setTitle] = useState("");
-    const [price, setPrice] = useState(0);
-    const [description, setDescription] = useState("");
-    const [seating, setSeating] = useState(0);
+    const [title, onTitle] = useInput("");
+    const [price, onPrice] = useInput(0);
+    const [description, onDescription] = useInput("");
+    const [seating, onSeating] = useInput(0);
     const [latitude, setLatitude] = useState(0);
     const [longitude, setLogitude] = useState(0)
     const [errors, setErrors] = useState([])
 
     if (!sessionUser) return <Redirect to='/login' />
     
+    // const [errors, onSubmit] = useSubmit({
+    //     createAction: () => {
+    //         const newBench = {
+    //             title: title, 
+    //             price: price,
+    //             description: description,
+    //             seating: seating
+    //         };
+
+    //         return createBench(newBench)
+    //     },
+    //     onSuccess: () => history.push('/')
+    // })
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -54,19 +68,19 @@ const BenchFormPage = props => {
                     {errors.map(error => <li key={error} className="error-message">{error}</li>)}
                 </ul>
                 <label>Title:
-                    <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+                    <input type="text" value={title} onChange={onTitle} />
                 </label>
                 <br></br>
                 <label>Price:
-                    <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} />
+                    <input type="number" value={price} onChange={onPrice} />
                 </label>
                 <br></br>
                 <label>Description
-                    <textarea value={description}onChange={(e) => setDescription(e.target.value)}></textarea>
+                    <textarea value={description} onChange={onDescription}></textarea>
                 </label>
                 <br></br>
                 <label>Seating number:
-                    <input type="number" value={seating} onChange={(e) => setSeating(e.target.value)} />
+                    <input type="number" value={seating} onChange={onSeating} />
                 </label>
                 <br></br>
 

@@ -7,6 +7,8 @@ class ApplicationController < ActionController::API
   
   protect_from_forgery with: :exception
   before_action :snake_case_params, :attach_authenticity_token
+  
+  helper_method :current_user
 
   # def test
   #   if params.has_key?(:login)

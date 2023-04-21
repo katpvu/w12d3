@@ -4,4 +4,5 @@ class Bench < ApplicationRecord
     validates :price, inclusion: { in: 10..1000 }
 
     #associations
+    has_many :reviews
 end
